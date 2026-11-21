@@ -1,0 +1,20 @@
+{
+  "name": "entiny-icons",
+  "version": "0.1.0",
+  "description": "entinyGram icon pack: one style, 24x24 grid, Iconify-compatible JSON",
+  "private": false,
+  "license": "MIT",
+  "type": "module",
+  "main": "icons.json",
+  "exports": {
+    ".": "./icons.json",
+    "./icons.json": "./icons.json",
+    "./svg/*": "./svg/*"
+  },
+  "files": ["icons.json", "svg"],
+  "scripts": {
+    "dev": "bun dev.js",
+    "build": "bun build.js",
+    "check": "bun build.js --check"
+  }
+}

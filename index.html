@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Галерея SVG-іконок із прозорим фоном.">
+    <title>галерея іконок entinygram</title>
+    <link rel="preload" href="/fonts/overused-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="./gallery.css">
+    <script type="module" src="./gallery.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">до вмісту</a>
+    <header class="top">
+      <div class="wrap top-inner">
+        <a class="wordmark" href="/">
+          <span class="pack-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          іконпак
+        </a>
+        <nav class="top-nav" aria-label="розділи">
+          <a class="top-link" href="/entinygram">entinygram</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap" id="main">
+      <div class="intro">
+        <h1>галерея іконок<span>.</span></h1>
+        <p>векторні знаки для entinygram і вебу</p>
+      </div>
+
+      <div class="gallery-layout">
+      <section class="collection" id="collection" aria-labelledby="collection-title">
+        <div class="collection-head">
+          <h2 id="collection-title">колекція <output class="technical" id="count" aria-label="знайдено іконок"></output></h2>
+          <label class="search">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 4 4"/></svg>
+            <input type="search" id="search" aria-label="пошук іконок" placeholder="пошук іконок">
+          </label>
+        </div>
+        <div class="collection-tools">
+          <fieldset class="categories">
+            <legend class="screen-reader-only">категорія іконок</legend>
+            <label><input type="radio" name="category" value="all" checked><span>усі</span></label>
+            <label><input type="radio" name="category" value="brands"><span>бренди</span></label>
+            <label><input type="radio" name="category" value="system"><span>системні</span></label>
+            <label><input type="radio" name="category" value="other"><span>інші</span></label>
+          </fieldset>
+          <label class="sort">сортування
+            <select id="sort">
+              <option value="pack">порядок паку</option>
+              <option value="asc">назва a → z</option>
+              <option value="desc">назва z → a</option>
+            </select>
+          </label>
+        </div>
+        <div class="catalog" id="catalog"></div>
+        <div id="empty" class="catalog-empty" hidden>
+          <p role="status">іконок за цими умовами немає</p>
+          <button class="button" type="button" id="reset-filters">скинути фільтри</button>
+        </div>
+      </section>
+
+      <div class="detail">
+      <section class="workbench" aria-labelledby="icon-name" hidden>
+        <div class="preview">
+          <div class="preview-head">
+            <h2>передперегляд</h2>
+            <span class="technical" id="file-name">monobank.svg</span>
+          </div>
+          <div class="stage" data-surface="dark">
+            <div class="stage-visual">
+              <span class="guides" aria-hidden="true"></span>
+              <span class="art" id="stage-art" aria-hidden="true"></span>
+            </div>
+            <span class="stage-note technical">24 × 24 viewbox</span>
+          </div>
+        </div>
+        <div class="inspector">
+          <div class="icon-title">
+            <h2 id="icon-name">monobank</h2>
+            <label class="style-label">стиль <select id="variant" aria-label="стиль іконки"></select></label>
+            <div class="icon-tags">
+              <span class="category-tag" id="category-tag"></span>
+              <span class="style-tag" id="style-tag"></span>
+            </div>
+          </div>
+          <div class="settings">
+            <label class="range-label" for="size">розмір <output class="technical" id="size-value" for="size">240 px</output></label>
+            <input id="size" type="range" min="16" max="240" value="240">
+            <fieldset class="surfaces">
+              <legend>фон</legend>
+              <label><input type="radio" name="surface" value="light"><span>світлий</span></label>
+              <label><input type="radio" name="surface" value="dark" checked><span>темний</span></label>
+              <label><input type="radio" name="surface" value="clear"><span>прозорий</span></label>
+            </fieldset>
+          </div>
+          <div class="samples">
+            <h3>реальні розміри</h3>
+            <div id="samples" class="sample-grid"></div>
+          </div>
+          <div class="actions">
+            <a class="button primary" id="download" download>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg>
+              <span>зберегти svg</span>
+            </a>
+            <button class="button" type="button" id="copy">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+              <span>копіювати</span>
+            </button>
+          </div>
+          <p id="feedback" class="feedback" role="status"></p>
+        </div>
+      </section>
+
+      <p id="load-status" role="status">завантажую іконки…</p>
+      </div>
+      </div>
+    </main>
+  </body>
+</html>

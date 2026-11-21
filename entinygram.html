@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>плагіни й репозиторії — entinygram</title>
+  <link rel="stylesheet" href="./gallery.css">
+  <style>
+    .comparison-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    .comparison-head .intro { margin: 0; }
+    .compare-controls, .compare-controls fieldset { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+    .compare-controls fieldset { padding: 0; margin: 0; border: 0; }
+    .compare-controls legend { padding: 0; color: var(--muted); font-size: .8rem; }
+    .compare-controls label { position: relative; cursor: pointer; }
+    .compare-controls input { position: absolute; opacity: 0; }
+    .compare-controls label span { display: grid; place-items: center; min-height: 44px; padding-inline: 10px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; font-size: .84rem; }
+    .compare-controls input:checked + span { border-color: var(--accent); background: var(--accent-wash); color: var(--accent); }
+    .compare-controls input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    .comparison:has([value="16"]:checked) { --sample-size: 16px; }
+    .comparison:has([value="24"]:checked) { --sample-size: 24px; }
+    .comparison:has([value="dark"]:checked) { --sample-ink: #eff5e5; --sample-paper: #20251f; }
+    .compare-section { margin-top: 32px; }
+    .compare-section h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 12px; }
+    .compare-list { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
+    .compare-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      align-items: center;
+      gap: clamp(12px, 5vw, 64px);
+      padding-block: 17px;
+      border-top: 1px solid var(--line);
+    }
+    .compare-row :is(h2, h3) { font-size: clamp(1rem, 2.2vw, 1.27rem); line-height: 1.25; }
+    .compare-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .compare-pair figure { margin: 0; text-align: center; }
+    .compare-pair figcaption { margin-bottom: 4px; color: var(--muted); font-size: .82rem; }
+    .compare-swatch { display: grid; place-items: center; min-height: 60px; border: 1px solid var(--line); border-radius: 7px; background: var(--sample-paper, #edeee8); }
+    .compare-empty { color: var(--sample-ink, #222720); opacity: .78; font-size: .82rem; }
+    .compare-icon { display: block; width: var(--sample-size, 32px); height: var(--sample-size, 32px); background: var(--sample-ink, #222720); mask: var(--shape) center / contain no-repeat; }
+
+    @media (max-width: 520px) {
+      .compare-row { grid-template-columns: 1fr; gap: 8px; }
+      .compare-swatch { min-height: 52px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#plugin-settings">до вмісту</a>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="wordmark" href="/">
+        <span class="pack-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        іконпак
+      </a>
+      <a class="top-link" href="/">до колекції</a>
+    </div>
+  </header>
+  <main class="wrap comparison" id="plugin-settings">
+    <div class="comparison-head">
+      <div class="intro">
+        <h1>плагіни й репозиторії<span>.</span></h1>
+      </div>
+      <div class="compare-controls">
+        <fieldset>
+          <legend>розмір</legend>
+          <label><input type="radio" name="compare-size" value="16"><span>16 px</span></label>
+          <label><input type="radio" name="compare-size" value="24"><span>24 px</span></label>
+          <label><input type="radio" name="compare-size" value="32" checked><span>32 px</span></label>
+        </fieldset>
+        <fieldset>
+          <legend>фон</legend>
+          <label><input type="radio" name="compare-theme" value="light"><span>світлий</span></label>
+          <label><input type="radio" name="compare-theme" value="dark" checked><span>темний</span></label>
+        </fieldset>
+      </div>
+    </div>
+    <ul class="compare-list">
+      <li class="compare-row">
+        <h2>Перевірити дозволи плагінів</h2>
+        <div class="compare-pair">
+          <figure>
+            <figcaption>до</figcaption>
+            <div class="compare-swatch" title="msg_permissions"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/webp;base64,UklGRhoCAABXRUJQVlA4TA4CAAAvR8AREBJJbiQ5kvTl+f/FR0RmiFx5CyQiIQARP/o/0z9rgA4C9RlEGA9iFIOYQRhBBDKSCO77GEiSGgUKsYgHN9EnfDD+OxAvLGwcvI9jRVPA8+CDH/5L7PusVvfji7/H4RzR4mw/GW7zE5z5pDiP7Utq0ok79t3DZ024DC/zakwlsfYwo166jrN4lU7uYbTqCr+tXZzaLG4qxU4ZOhVukxdRl2FSik6dfQwumuRcTplOFQsjGXZq0G1EQZUzMVHLBnGWNg0WEQ2tajbBOwZGYpEnLoHCuNNP1UryQCydy4XrTpOeV08FQgNxHsXDukt991wSThkbvtCueLIwy9bFmnS0qT3S4JBDWyQ4NG4G4tzatLw/cFN8m0BBg4M4b/mDkdiibF19mwIMbwttd+DzVl1HGDkY1pFPXfwN6/rMp1oQ9Bk19cjGfQ+7OqVt+rANtZwLh5vQ7ebU5clgbupoVKnNHN8FpcXqVMnGk246rPc5S04rUr7vUtHl9bnzzYEdsn2gareGIw7560b70igIW1Isin2yLeWR0o7UrE4scae1+464CsJQ91zcafJdE0+xd9xlA1wYi++sI6DAvncPXO+yXaXlmHQuDEsHqmmMYXMimwEux6MZYDHkmLQGjnccbMfCRGRmMzivvmttAQz3bAgcbwV1bMClidGS5+oS/muwHtkMMaP+wyPyPxgT')"></span></div>
+          </figure>
+          <figure>
+            <figcaption>після</figcaption>
+            <div class="compare-swatch" title="permissions.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/drafts/permissions.svg')"></span></div>
+          </figure>
+        </div>
+      </li>
+      <li class="compare-row">
+        <h2>Видалити всі плагіни</h2>
+        <div class="compare-pair">
+          <figure>
+            <figcaption>до</figcaption>
+            <div class="compare-swatch" title="msg_delete"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABIBAMAAACnw650AAAAJ1BMVEVHcEz///////////////////////////////////////////////8NopmKAAAADHRSTlMABhoyUGyFnbnT5/Vq6XHMAAABHUlEQVR42u3SAUTFQBjA8f9tAGGAJAwwwDACeBUQgCAgAhEKgIcAEAJCkAB6EFAMPcG8PgSA6AEEOQCwhapz922rkKL9wO7zdzb7+FXxbiki1zv0MGN5dUC3RXlTJXQay7t9usTy4RacyIvgabMoii1L3BddzIGHsyAKDjcAzb2bKwsi7kHJSmlX5frTtWMXTTqj6Tdv6n+nPy27Sj+fHckhoGfeD85ZJWBG5H5kMSoCO0Rfj5xlkQQ98m96hjBKqK0fNW1RA0PkMyJTPQlvmmOCCB6DCKsjLENE50brQYRacrXiLmp01PCjUepFqY6oYR2HeERNyJQyW3PHaEPkEmVPQtsoS2EzS1CiSRCdo5H5TZXSZuXUJXcnOf/ECxRbM4tBrMybAAAAAElFTkSuQmCC')"></span></div>
+          </figure>
+          <figure>
+            <figcaption>після</figcaption>
+            <div class="compare-swatch" title="trash.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/drafts/trash.svg')"></span></div>
+          </figure>
+        </div>
+      </li>
+      <li class="compare-row">
+        <h2>Компактний вигляд</h2>
+        <div class="compare-pair">
+          <figure>
+            <figcaption>до</figcaption>
+            <div class="compare-swatch" title="msg_list"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/webp;base64,UklGRlQAAABXRUJQVlA4TEcAAAAvR8AREDUobSPJafn7J6aX4CfN9XArCECGkUlbOcQ7m9q2bRiX9DlHrLETEYTgYn4wagRfTiQoCN/APwdzmjEnF7L/uRHxAwA=')"></span></div>
+          </figure>
+          <figure>
+            <figcaption>після</figcaption>
+            <div class="compare-swatch" title="compact-view.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/drafts/compact-view.svg')"></span></div>
+          </figure>
+        </div>
+      </li>
+      <li class="compare-row">
+        <h2>Звичайний вигляд</h2>
+        <div class="compare-pair">
+          <figure>
+            <figcaption>до</figcaption>
+            <div class="compare-swatch" title="msg_media"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/webp;base64,UklGRvYAAABXRUJQVlA4TOkAAAAvR8AREDUwbiTJScrk/+nD7gzes8z1cCMGoEgHMUBx3S+oaMJYgBi4kdRm0vsSwcJ+ofqdSRMAhsLBhia4BAO2LBEQFBZPCbJlaQtMm0C2LOUqVCQBW1YMGKZOYFtWDLQFMlwsANIpqS0rBq4l+jtApzrYsmJgLZoWW9b5jNqubaR2LfuMjeczjrEN+9V4vgdAVSBdIP9oPpwgFZCrSuynJOD3Vf3aPsjoNyN9kOH+DgINgEswcMDGSzN60Yzq/3za43z8YT5+NR//nMjPL5Xx0nzyyHzy0Xzy2nzy42zy7Gzy9Xzy/ok0JQA=')"></span></div>
+          </figure>
+          <figure>
+            <figcaption>після</figcaption>
+            <div class="compare-swatch" title="card-view.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/drafts/card-view.svg')"></span></div>
+          </figure>
+        </div>
+      </li>
+      <li class="compare-row">
+        <h2>Перезавантажити</h2>
+        <div class="compare-pair">
+          <figure>
+            <figcaption>до</figcaption>
+            <div class="compare-swatch" title="msg_reset"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/webp;base64,UklGRvoBAABXRUJQVlA4TO4BAAAvR8AREA44tq1UdKac+Tc3H0C4viqVLBB/9H+mf8YA2Aa6VwkCMYowHEUYJnIcRxGSUuQVhgFAtkG6yEKFF754/lMRAxPr4ZvvFcZWHhb+8eIamIO1iYXfwcFd41w+YGLjOvEUF/AZ3ABOEgHLGqfwnsFfz0lzKVgswNOGSfseYzW3DWP34XgHdsAEZSwJg9FSSVyXht5NpeU4Heyoyk6rxzCzlQkJxu/oRFIs6JwlpbBi/oojnsM+XnJ1GYExdkjR1kQ2aGmcY73yA7YQojj3STGgP7Lg/sEqlOxZ4sjNkfBE2Bg4HmWHTYgRsH6KUMRjYwXemxfTOvCahjRROH0c8XMcHpxyMzAlh4i58gasTHwtSWwJiTexSINiLXbfBoxQ1XAcbxaAL66mFAuwAnpyOubKj9/gkZC/MUsF9CLDS03qUnhx1Z31siZsLAEXR5+NLBFHNHwyBD3ZMHkDuY9ttRV8dvn/XRE2BvV/jNDg2RkfMC1qcrzyU2FR4yeOQ/Ha7XF+4hU7nvtITbn/fMFzVZbFPO/2Y5P+/MfLBwjAyk8obWe+xE+im/e0IZ90OnG30wuuzn4xWA3HmW9fVr7tiM14G9Od/1N/N73l6V31iDo5baxXjvqI9xio1z6ifqy5n1LP7q2vr66v/0HxAQ==')"></span></div>
+          </figure>
+          <figure>
+            <figcaption>після</figcaption>
+            <div class="compare-swatch" title="refresh.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/drafts/refresh.svg')"></span></div>
+          </figure>
+        </div>
+      </li>
+      <li class="compare-row">
+        <h2>Поділитися файлом</h2>
+        <div class="compare-pair">
+          <figure>
+            <figcaption>до</figcaption>
+            <div class="compare-swatch" title="msg_share"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/webp;base64,UklGRuwBAABXRUJQVlA4TOABAAAvR8AREBZYDui2ba6c+/+8DmqR+eoUJEDyAbJoUNSP/s/0jyi2bVi/CDKIIIYkaghxcwhxM4hgacmB27aRZKezu73bybVfuFC+WIkbnor7VQAv/M0MgyMPPIwQb3nBUpjjKg18Axg+0oKfRaRfAWjXtuSx6DR7iVfXflC5icNPKqbi8BMbiDi8DipTBnXtTRAVDH/bDXMYZWCMGBHb7JhtZin45JeFtSh3ZD/KbOR9WILD03LwiEbnOTB1anyzt81m5D0yqtVb1gtYXEZ+a6Gju2W/RSYj1/AeiyyYxchnUGaZRnEYOYbJU8aMPL0/ZvWO2uYoC0nT3dmkuRcokjondt5dt1gR/VGxcWfE1WWv/BmwEQ/CM9Eta0s7HWOl9J++rmSElbDHW/6C3P6hHqQu0ame66afnKp8/uqWfF1dMQlHzOc/sXElPBVrSbL58x419nNuyyCb4U9yNnrQZlYATGmpLTTEHp/n8IGZkyIj/hb03jju00JidQVXTxAvszgTjtXuSV5fHEz5CdnZLRLl6ocSpMGTL+GQ+SL58Id95IAnf1sWpbpngTHEhbU5VmaM+S3GrCjKGWO+PcLwf3PPRplPzLFV8f8jFVum1sqZslUdmFX62iqOXwGX6vLvYTo=')"></span></div>
+          </figure>
+          <figure>
+            <figcaption>після</figcaption>
+            <div class="compare-swatch" title="share-logs.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/share-logs.svg')"></span></div>
+          </figure>
+        </div>
+      </li>
+      <li class="compare-row">
+        <h2>Видалити</h2>
+        <div class="compare-pair">
+          <figure>
+            <figcaption>до</figcaption>
+            <div class="compare-swatch" title="msg_delete"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABIBAMAAACnw650AAAAJ1BMVEVHcEz///////////////////////////////////////////////8NopmKAAAADHRSTlMABhoyUGyFnbnT5/Vq6XHMAAABHUlEQVR42u3SAUTFQBjA8f9tAGGAJAwwwDACeBUQgCAgAhEKgIcAEAJCkAB6EFAMPcG8PgSA6AEEOQCwhapz922rkKL9wO7zdzb7+FXxbiki1zv0MGN5dUC3RXlTJXQay7t9usTy4RacyIvgabMoii1L3BddzIGHsyAKDjcAzb2bKwsi7kHJSmlX5frTtWMXTTqj6Tdv6n+nPy27Sj+fHckhoGfeD85ZJWBG5H5kMSoCO0Rfj5xlkQQ98m96hjBKqK0fNW1RA0PkMyJTPQlvmmOCCB6DCKsjLENE50brQYRacrXiLmp01PCjUepFqY6oYR2HeERNyJQyW3PHaEPkEmVPQtsoS2EzS1CiSRCdo5H5TZXSZuXUJXcnOf/ECxRbM4tBrMybAAAAAElFTkSuQmCC')"></span></div>
+          </figure>
+          <figure>
+            <figcaption>після</figcaption>
+            <div class="compare-swatch" title="trash.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/drafts/trash.svg')"></span></div>
+          </figure>
+        </div>
+      </li>
+      <li class="compare-row">
+        <h2>Налаштування плагіна</h2>
+        <div class="compare-pair">
+          <figure>
+            <figcaption>до</figcaption>
+            <div class="compare-swatch" title="msg_settings"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/webp;base64,UklGRhwDAABXRUJQVlA4TBADAAAvR8AREGUIBJL2Vx8gIhK9AAWinL9Dv9fljpTktpEgSf9/NbFdkRHOjNl7BGLaVrQL4DNEEEQMAxFCCjEMwwAMQwQhBNAqBpKkxMEjd4LILpgnSMDhtTAHNgV7ti0eXhNu7FAMWxJmg0JXhNpEDF4QpIoot97iVjX8ta1Ajce4RZGFjSjDDgzD3ov8xBnc5hP3vePbTyCwsHylNSHQKqsmNJSHT+tijC4cVRalBf2nGZaR8XTRBf+GyXxjrZEsO0Fk556HCs4k/oFLr8GXokkzibfDA2AZMr/z8+9rGCMvqRqHtlKqsxVJsMV1975DBRmhRuKP6Vz97TEIHanuaIGbiXQCjKhTZcLoDd4dz6X9HGgYIWKdNex3VtKVQxaKN5GYKOMhK4RvephA0UIsUX7v37ROUzpS7itjlM9xOtu6TOg9ERHfNsUnF/QoWh14NEgxYUagOAi5lx0cZ9uTcNk56emxhS4J9XT/mBzrcVUyjBBm8rg4NjnwkRsRAmm5Bn0TYBLnxpWc3Mkq1jgBRFp801K9foi6jhsG3aZohqseCX3iWVmNkyHpSVmFpsg+DAkfjYwzNY3Si3yZD4e8XsWzs8shkZERY5CBd93RuQZ9+BDbIIrJerAUjSlDvBS/odzognh54DV3R67M3t5y1uhF8OJFY6Q1tN8/Gnnr/1jNoRzJwzav8Djtmg6PbuTKpM8JYn4AeZDPH+ArWV2w50+8yZ+05+Q3fJ6jr9WBbcUXPscp8SjexV1/Gu3EXzDtabA1cK4Udxi6+3btkzi3GNOVDZFHxF1PmJwK/tmNJTpTRn6xCkZM+hwP2iYc4sFPQVrSe8NROHJ1gBSa/JYmFrbG93WXb18iSx6Jvjf6p7ZB4U+QrmbD0xfrEZItIxKTt2sEz2QJOK8G5LLbz1wLRF0j/NL7dL3mn0YmQtXXoxwXlJI+552+ZVrnBkLg0XK/Aj+4opeWCCIJm0tY0/AH1vtgJgYH73DBpR8QVp//Q7Rd4yLQe/9n7pDV5BA7ddzVzt5fOdGeNGL1zxwQp/u/938U')"></span></div>
+          </figure>
+          <figure>
+            <figcaption>після</figcaption>
+            <div class="compare-swatch" title="app-controls.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/app-controls.svg')"></span></div>
+          </figure>
+        </div>
+      </li>
+      <li class="compare-row">
+        <h2>Сортування</h2>
+        <div class="compare-pair">
+          <figure>
+            <figcaption>до</figcaption>
+            <div class="compare-swatch" title="msg_recent"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/webp;base64,UklGRgwCAABXRUJQVlA4TAACAAAvR8AREHXAkW23brNl77+5+UDmezAqVxwJxMz1cKOpbSWOP8EPQAhykIEUlvmzEYhAEGdnRxy4bRtJnjuzKDLOvU94vb4SGwAcNggaLjz48+wbBBsc8CkJJBR8mMU2DfkBARjoIlkK7k6+gwNjbHASbwB7YKxt9p0EIPRbS2wIMCDgPg2x31oJGpgCcLgwEQ8IArCgp0HPidsGT0DPG9Yspqdt7BM3kEzZAV0U2+79la8Mvr1b8LnYL8X+A+5otqNn2v4EOJEsoK4XdDwyfCnu0AB5BUUr40utBcBGZamhpsFE5qcdkhSrQZ1zWvAEg3qw6K+KQnPOGUGb6L/9eqkKDVBBUFTxqVE/FzDRYjJkbxjAGpAhJQAyAQzJYgQrxvcGZAO0+AyRi9YewSPLuQCM5J87kmNCNMGWSN7Z2JIpoUMqs6C/gF4hxCmYBT3y9grPP4DZAAZXV4L3AFTonwYIvmVBUumB0JH4AHXpA4Dqg/YTo+hEofiTxIXufs5VmLAQyKupQDgwV6Hi/3I8JgjX8SjnB18IF7jMD3K+ShBCLvOVnj99IeQqfxr53BS+fQDEfG7UF1MIOWdZX4x6p256vTPqrwy9/jr9gAq5H0jrT+wObbpMv1SnfyvTT5bpb8v022X6/zLzSJn5qMy8VmZ+rDLPVpmvq8z7Vf5/+EZsNw==')"></span></div>
+          </figure>
+          <figure>
+            <figcaption>після</figcaption>
+            <div class="compare-swatch" title="options-menu.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/options-menu.svg')"></span></div>
+          </figure>
+        </div>
+      </li>
+      <li class="compare-row">
+        <h2>Повторити</h2>
+        <div class="compare-pair">
+          <figure>
+            <figcaption>до</figcaption>
+            <div class="compare-swatch" title="msg_retry"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/webp;base64,UklGRqYBAABXRUJQVlA4TJkBAAAvR8AREHXAsW03brPl7L95DYcPoMpM8gDkXA83m4Btw+zqbRBGMhBFYDqFYRTFMBTBoHsO3EZSpFTPMQxP9T7h4+drQmAIHLgwwIH/rIQDAUcBCzYUpiZa58EytxcukGtWE2iJOstGVlVO2lMG5bIAVFUNAEHLqAPSqTHwwgxHArLBoPfO2hDosDrbBTiDWua051YOXkg7IPiq5cLWKvgG1QIZAd/uExC96yGrC7AJ0DWMoDD6F2ShLUD3quFFoA0D2ZZtX2K7jZTZg+IWWwQE0xe/WCCNdtwgXrsHpK2qRlcjN7WtBcvAgPxoex+uzDuOeu1XRO5x1VX6vxQBCXa6g2WmKh2+AlRdkAOAw8kBgZ7Zy0DQzTmgN19f4v7/jauVQM0Fs6d24cB2ID32R2gV4BBAaRKOrxV0U8oR8zxetgONOO9EdsT5K3LS3w/IgP39icyJ8UsaMf5NI8ZPaoT4W5EIv60S4P9lAvIRGf/8SMc9XzPgnD+aiMlnAYmY/DolvxiT76908NMPolx/gLzY6yHVXw/5FOgAAA==')"></span></div>
+          </figure>
+          <figure>
+            <figcaption>після</figcaption>
+            <div class="compare-swatch" title="refresh.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/drafts/refresh.svg')"></span></div>
+          </figure>
+        </div>
+      </li>
+    </ul>
+  </main>
+</body>
+</html>
