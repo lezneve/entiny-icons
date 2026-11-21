@@ -28,8 +28,6 @@ const icons = [
     ["openai", "chatgpt", "openai blossom"],
     ["groq-ai", "groq", "провайдер ші"],
     ["trx", "tron", "trc-20"],
-  ].map(([name, ...keywords]) => ({ name, keywords, category: "brands", variants: { solid: `${name}.svg` } })),
-  ...[
     ["entinygram", "новий знак", "застосунок"],
     ["entinygram-old", "старий знак", "entinygram", "архів"],
   ].map(([name, ...keywords]) => ({ name, keywords, category: "brands", variants: { outline: `${name}.svg` } })),
@@ -215,7 +213,7 @@ let selected = null;
 let request = 0;
 let activeSource = "";
 
-function renderCatalog(preferred = selected) {
+function renderCatalog(preferred = selected, preferredVariant) {
   const query = search.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
   const category = categories.querySelector("input:checked").value;
   const matches = icons.filter((icon) => {
@@ -267,7 +265,7 @@ function renderCatalog(preferred = selected) {
     loadStatus.hidden = true;
   } else if (nextIcon !== selected) {
     workbench.hidden = true;
-    return openIcon(nextIcon);
+    return openIcon(nextIcon, nextIcon === preferred ? preferredVariant : undefined);
   }
 }
 
@@ -419,13 +417,15 @@ copy.addEventListener("click", () => {
 copyLink.addEventListener("click", () => {
   const url = new URL("/", location.href);
   url.searchParams.set("icon", selected.name);
+  if (variantSelect.value !== Object.keys(selected.variants)[0]) url.searchParams.set("style", variantSelect.value);
   copyText(url.href, "посилання скопійовано", "не вдалося скопіювати посилання.");
 });
 
 updateSize();
-const linkedName = new URLSearchParams(location.search).get("icon");
-const linkedIcon = icons.find((icon) => icon.name === linkedName);
-const initialPreview = renderCatalog(linkedIcon);
+const params = new URLSearchParams(location.search);
+const linkedIcon = icons.find((icon) => icon.name === params.get("icon"));
+const linkedStyle = params.get("style");
+const initialPreview = renderCatalog(linkedIcon, linkedIcon && Object.hasOwn(linkedIcon.variants, linkedStyle) ? linkedStyle : undefined);
 if (linkedIcon && stacked.matches) {
   initialPreview?.then(() => {
     if (selected === linkedIcon && !workbench.hidden) workbench.scrollIntoView({ block: "start" });

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>базові іконки й бренди — entinygram</title>
+  <title>контурні іконки — entinygram</title>
   <link rel="stylesheet" href="./gallery.css">
   <style>
     .comparison-head {
@@ -28,33 +28,16 @@
     .comparison:has([value="16"]:checked) { --sample-size: 16px; }
     .comparison:has([value="24"]:checked) { --sample-size: 24px; }
     .comparison:has([value="dark"]:checked) { --sample-ink: #eff5e5; --sample-paper: #20251f; }
-    .compare-section { margin-top: 32px; }
-    .compare-section h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 12px; }
-    .compare-list { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
-    .compare-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-      align-items: center;
-      gap: clamp(12px, 5vw, 64px);
-      padding-block: 17px;
-      border-top: 1px solid var(--line);
-    }
-    .compare-row :is(h2, h3) { font-size: clamp(1rem, 2.2vw, 1.27rem); line-height: 1.25; }
-    .compare-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .compare-pair figure { margin: 0; text-align: center; }
-    .compare-pair figcaption { margin-bottom: 4px; color: var(--muted); font-size: .82rem; }
-    .compare-swatch { display: grid; place-items: center; min-height: 60px; border: 1px solid var(--line); border-radius: 7px; background: var(--sample-paper, #edeee8); }
-    .compare-empty { color: var(--sample-ink, #222720); opacity: .78; font-size: .82rem; }
+    .outline-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 128px), 1fr)); gap: 12px; list-style: none; margin: 0; padding: 0; }
+    .outline-item { display: grid; gap: 6px; padding: 4px; border-radius: 9px; text-align: center; color: var(--muted); font-size: .88rem; }
+    .outline-item:hover { color: var(--ink); }
+    .compare-swatch { display: grid; place-items: center; min-height: 66px; border: 1px solid var(--line); border-radius: 7px; background: var(--sample-paper, #edeee8); }
+    .outline-item:hover .compare-swatch { border-color: var(--accent); }
     .compare-icon { display: block; width: var(--sample-size, 32px); height: var(--sample-size, 32px); background: var(--sample-ink, #222720); mask: var(--shape) center / contain no-repeat; }
-
-    @media (max-width: 520px) {
-      .compare-row { grid-template-columns: 1fr; gap: 8px; }
-      .compare-swatch { min-height: 52px; }
-    }
   </style>
 </head>
 <body>
-  <a class="skip" href="#legacy-icons">до вмісту</a>
+  <a class="skip" href="#outline-comparison">до вмісту</a>
   <header class="top">
     <div class="wrap top-inner">
       <a class="wordmark" href="/">
@@ -64,10 +47,10 @@
       <a class="top-link" href="/">до колекції</a>
     </div>
   </header>
-  <main class="wrap comparison" id="legacy-icons">
+  <main class="wrap comparison" id="outline-comparison">
     <div class="comparison-head">
       <div class="intro">
-        <h1>базові іконки й бренди<span>.</span></h1>
+        <h1>контурні іконки<span>.</span></h1>
       </div>
       <div class="compare-controls">
         <fieldset>
@@ -83,214 +66,108 @@
         </fieldset>
       </div>
     </div>
-    <ul class="compare-list">
-      <li class="compare-row">
-        <h2>копіювати</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_lucide_copy"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAyMiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEgLTEpIHNjYWxlKDEgMSkiPjxwYXRoIGQ9Ik0xMCw4SDIwQTIsMiAwIDAgMSAyMiwxMFYyMEEyLDIgMCAwIDEgMjAsMjJIMTBBMiwyIDAgMCAxIDgsMjBWMTBBMiwyIDAgMCAxIDEwLDh6IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS42NSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTQgMTZjLTEuMSAwLTItLjktMi0yVjRjMC0xLjEuOS0yIDItMmgxMGMxLjEgMCAyIC45IDIgMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvZz48L3N2Zz4=')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="copy.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/copy.svg')"></span></div>
-          </figure>
-        </div>
+    <ul class="outline-list">
+      <li>
+        <a class="outline-item" href="/?icon=telegram">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/telegram.svg')"></span></span>
+          <span>telegram</span>
+        </a>
       </li>
-      <li class="compare-row">
-        <h2>вирізати</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_lucide_scissors"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAyMiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEgLTEpIHNjYWxlKDEgMSkiPjxwYXRoIGQ9Ik0zLDZhMywzIDAgMSwwIDYsMGEzLDMgMCAxLDAgLTYsMHoiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxLjY1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNOC4xMiA4LjEyTDEyIDEybTgtOEw4LjEyIDE1Ljg4IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS42NSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTMsMThhMywzIDAgMSwwIDYsMGEzLDMgMCAxLDAgLTYsMHoiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxLjY1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTQuOCAxNC44TDIwIDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS42NSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9nPjwvc3ZnPg==')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="scissors.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/scissors.svg')"></span></div>
-          </figure>
-        </div>
+      <li>
+        <a class="outline-item" href="/?icon=github">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/github.svg')"></span></span>
+          <span>github</span>
+        </a>
       </li>
-      <li class="compare-row">
-        <h2>вставити</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_lucide_clipboard"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAyMiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEgLTEpIHNjYWxlKDEgMSkiPjxwYXRoIGQ9Ik05LDJIMTVBMSwxIDAgMCAxIDE2LDNWNUExLDEgMCAwIDEgMTUsNkg5QTEsMSAwIDAgMSA4LDVWM0ExLDEgMCAwIDEgOSwyeiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNiA0aDJhMiAyIDAgMCAxIDIgMnYxNGEyIDIgMCAwIDEtMiAySDZhMiAyIDAgMCAxLTItMlY2YTIgMiAwIDAgMSAyLTJoMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvZz48L3N2Zz4=')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="clipboard.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/clipboard.svg')"></span></div>
-          </figure>
-        </div>
+      <li>
+        <a class="outline-item" href="/?icon=boosty">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/boosty.svg')"></span></span>
+          <span>boosty</span>
+        </a>
       </li>
-      <li class="compare-row">
-        <h2>виділити все</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_lucide_square_dashed_text"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAyMiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEgLTEpIHNjYWxlKDEgMSkiPjxwYXRoIGQ9Ik0xNCAyMWgxTTE0IDNoMW00IDBhMiAyIDAgMCAxIDIgMm0wIDl2MW0wIDRhMiAyIDAgMCAxLTIgMm0yLTEydjFNMyAxNHYxbTAtNnYxbTIgMTFhMiAyIDAgMCAxLTItMk01IDNhMiAyIDAgMCAwLTIgMm00IDdoMTBNNyAxNmg2TTcgOGg4TTkgMjFoMU05IDNoMSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvZz48L3N2Zz4=')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="select-all.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/select-all.svg')"></span></div>
-          </figure>
-        </div>
+      <li>
+        <a class="outline-item" href="/?icon=patreon">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/patreon.svg')"></span></span>
+          <span>patreon</span>
+        </a>
       </li>
-      <li class="compare-row">
-        <h2>жирний</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_lucide_letter_b"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAyMiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEgLTEpIHNjYWxlKDEgMSkiPjxwYXRoIGQ9Ik02IDEyaDlhNCA0IDAgMCAxIDAgOEg3YTEgMSAwIDAgMS0xLTFWNWExIDEgMCAwIDEgMS0xaDdhNCA0IDAgMCAxIDAgOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvZz48L3N2Zz4=')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="bold.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/bold.svg')"></span></div>
-          </figure>
-        </div>
+      <li>
+        <a class="outline-item" href="/?icon=gemini">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/gemini.svg')"></span></span>
+          <span>gemini</span>
+        </a>
       </li>
-      <li class="compare-row">
-        <h2>курсив</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_lucide_italic"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAyMiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEgLTEpIHNjYWxlKDEgMSkiPjxwYXRoIGQ9Ik0xOSA0aC05bTQgMTZINU0xNSA0TDkgMjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxLjY1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+PC9zdmc+')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="italic.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/italic.svg')"></span></div>
-          </figure>
-        </div>
+      <li>
+        <a class="outline-item" href="/?icon=openrouter">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/openrouter.svg')"></span></span>
+          <span>openrouter</span>
+        </a>
       </li>
-      <li class="compare-row">
-        <h2>спойлер</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_lucide_eye_off"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAyMiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEgLTEpIHNjYWxlKDEgMSkiPjxwYXRoIGQ9Ik0xMC43MzMgNS4wNzZhMTAuNzQ0IDEwLjc0NCAwIDAgMSAxMS4yMDUgNi41NzVhMSAxIDAgMCAxIDAgLjY5NmExMC44IDEwLjggMCAwIDEtMS40NDQgMi40OW0tNi40MS0uNjc5YTMgMyAwIDAgMS00LjI0Mi00LjI0MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNy40NzkgMTcuNDk5YTEwLjc1IDEwLjc1IDAgMCAxLTE1LjQxNy01LjE1MWExIDEgMCAwIDEgMC0uNjk2YTEwLjc1IDEwLjc1IDAgMCAxIDQuNDQ2LTUuMTQzTTIgMmwyMCAyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvZz48L3N2Zz4=')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="eye-off.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/eye-off.svg')"></span></div>
-          </figure>
-        </div>
+      <li>
+        <a class="outline-item" href="/?icon=cloudflare">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/cloudflare.svg')"></span></span>
+          <span>cloudflare</span>
+        </a>
       </li>
-      <li class="compare-row">
-        <h2>видалити</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_lucide_trash"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAyMiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEgLTEpIHNjYWxlKDEgMSkiPjxwYXRoIGQ9Ik0xMCAxMXY2bTQtNnY2bTUtMTF2MTRhMiAyIDAgMCAxLTIgMkg3YTIgMiAwIDAgMS0yLTJWNk0zIDZoMThNOCA2VjRhMiAyIDAgMCAxIDItMmg0YTIgMiAwIDAgMSAyIDJ2MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvZz48L3N2Zz4=')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="trash.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/trash.svg')"></span></div>
-          </figure>
-        </div>
+      <li>
+        <a class="outline-item" href="/?icon=bitcoin">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/bitcoin.svg')"></span></span>
+          <span>bitcoin</span>
+        </a>
       </li>
-      <li class="compare-row">
-        <h2>пошук в архіві</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_lucide_search"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAyMiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEgLTEpIHNjYWxlKDEgMSkiPjxwYXRoIGQ9Im0yMSAyMWwtNC4zNC00LjM0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS42NSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTMsMTFhOCw4IDAgMSwwIDE2LDBhOCw4IDAgMSwwIC0xNiwweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvZz48L3N2Zz4=')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="search.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/search.svg')"></span></div>
-          </figure>
-        </div>
+      <li>
+        <a class="outline-item" href="/?icon=bnb-chain">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/bnb-chain.svg')"></span></span>
+          <span>bnb-chain</span>
+        </a>
       </li>
-      <li class="compare-row">
-        <h2>керування системою</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_lucide_settings"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAyMiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEgLTEpIHNjYWxlKDEgMSkiPjxwYXRoIGQ9Ik05LjY3MSA0LjEzNmEyLjM0IDIuMzQgMCAwIDEgNC42NTkgMGEyLjM0IDIuMzQgMCAwIDAgMy4zMTkgMS45MTVhMi4zNCAyLjM0IDAgMCAxIDIuMzMgNC4wMzNhMi4zNCAyLjM0IDAgMCAwIDAgMy44MzFhMi4zNCAyLjM0IDAgMCAxLTIuMzMgNC4wMzNhMi4zNCAyLjM0IDAgMCAwLTMuMzE5IDEuOTE1YTIuMzQgMi4zNCAwIDAgMS00LjY1OSAwYTIuMzQgMi4zNCAwIDAgMC0zLjMyLTEuOTE1YTIuMzQgMi4zNCAwIDAgMS0yLjMzLTQuMDMzYTIuMzQgMi4zNCAwIDAgMCAwLTMuODMxQTIuMzQgMi4zNCAwIDAgMSA2LjM1IDYuMDUxYTIuMzQgMi4zNCAwIDAgMCAzLjMxOS0xLjkxNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik05LDEyYTMsMyAwIDEsMCA2LDBhMywzIDAgMSwwIC02LDB6IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS42NSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9nPjwvc3ZnPg==')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="app-controls.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/app-controls.svg')"></span></div>
-          </figure>
-        </div>
+      <li>
+        <a class="outline-item" href="/?icon=ethereum">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/ethereum.svg')"></span></span>
+          <span>ethereum</span>
+        </a>
       </li>
-      <li class="compare-row">
-        <h2>код-пароль для іконки</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_tabler_lock_password"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiBkPSJNNSAxM2EyIDIgMCAwIDEgMi0yaDEwYTIgMiAwIDAgMSAyIDJ2NmEyIDIgMCAwIDEtMiAySDdhMiAyIDAgMCAxLTItMnptMy0yVjdhNCA0IDAgMSAxIDggMHY0bS0xIDVoLjAxbS0zIDBoLjAxbS0zIDBoLjAxIi8+PC9zdmc+')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="app-passcode.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/app-passcode.svg')"></span></div>
-          </figure>
-        </div>
+      <li>
+        <a class="outline-item" href="/?icon=solana">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/solana.svg')"></span></span>
+          <span>solana</span>
+        </a>
       </li>
-      <li class="compare-row">
-        <h2>переносити рядки</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_tabler_text_wrap"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAyMiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEgLTEpIHNjYWxlKDEgMSkiPjxwYXRoIGQ9Ik00IDZoMTZNNCAxOGg1bS01LTZoMTNhMyAzIDAgMCAxIDAgNmgtNGwyLTJtMCA0bC0yLTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxLjUzMDgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvZz48L3N2Zz4=')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="text-wrap.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/text-wrap.svg')"></span></div>
-          </figure>
-        </div>
+      <li>
+        <a class="outline-item" href="/?icon=tether">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/tether.svg')"></span></span>
+          <span>tether</span>
+        </a>
       </li>
-      <li class="compare-row">
-        <h2>openai</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_bi_openai"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwKSBzY2FsZSgxIDEpIj48cGF0aCBkPSJNMTQuOTQ5IDYuNTQ3YTMuOTQgMy45NCAwIDAgMC0uMzQ4LTMuMjczYTQuMTEgNC4xMSAwIDAgMC00LjQtMS45MzRBNC4xIDQuMSAwIDAgMCA4LjQyMy4yQTQuMTUgNC4xNSAwIDAgMCA2LjMwNS4wODZhNC4xIDQuMSAwIDAgMC0xLjg5MS45NDhhNC4wNCA0LjA0IDAgMCAwLTEuMTU4IDEuNzUzYTQuMSA0LjEgMCAwIDAtMS41NjMuNjc5QTQgNCAwIDAgMCAuNTU0IDQuNzJhMy45OSAzLjk5IDAgMCAwIC41MDIgNC43MzFhMy45NCAzLjk0IDAgMCAwIC4zNDYgMy4yNzRhNC4xMSA0LjExIDAgMCAwIDQuNDAyIDEuOTMzYy4zODIuNDI1Ljg1Mi43NjQgMS4zNzcuOTk1Yy41MjYuMjMxIDEuMDk1LjM1IDEuNjcuMzQ2YzEuNzguMDAyIDMuMzU4LTEuMTMyIDMuOTAxLTIuODA0YTQuMSA0LjEgMCAwIDAgMS41NjMtLjY4YTQgNCAwIDAgMCAxLjE0LTEuMjUzYTMuOTkgMy45OSAwIDAgMC0uNTA2LTQuNzE2bS02LjA5NyA4LjQwNmEzLjA1IDMuMDUgMCAwIDEtMS45NDUtLjY5NGwuMDk2LS4wNTRsMy4yMy0xLjgzOGEuNTMuNTMgMCAwIDAgLjI2NS0uNDU1di00LjQ5bDEuMzY2Ljc3OHEuMDIuMDExLjAyNS4wMzV2My43MjJjLS4wMDMgMS42NTMtMS4zNjEgMi45OTItMy4wMzcgMi45OTZtLTYuNTMtMi43NWEyLjk1IDIuOTUgMCAwIDEtLjM2LTIuMDFsLjA5NS4wNTdMNS4yOSAxMi4wOWEuNTMuNTMgMCAwIDAgLjUyNyAwbDMuOTQ5LTIuMjQ2djEuNTU1YS4wNS4wNSAwIDAgMS0uMDIyLjA0MUw2LjQ3MyAxMy4zYy0xLjQ1NC44MjYtMy4zMTEuMzM1LTQuMTUtMS4wOThtLS44NS02Ljk0QTMuMDIgMy4wMiAwIDAgMSAzLjA3IDMuOTQ5djMuNzg1YS41MS41MSAwIDAgMCAuMjYyLjQ1MWwzLjkzIDIuMjM3bC0xLjM2Ni43NzlhLjA1LjA1IDAgMCAxLS4wNDggMEwyLjU4NSA5LjM0MmEyLjk4IDIuOTggMCAwIDEtMS4xMTMtNC4wOTR6bTExLjIxNiAyLjU3MUw4Ljc0NyA1LjU3NmwxLjM2Mi0uNzc2YS4wNS4wNSAwIDAgMSAuMDQ4IDBsMy4yNjUgMS44NmEzIDMgMCAwIDEgMS4xNzMgMS4yMDdhMi45NiAyLjk2IDAgMCAxLS4yNyAzLjJhMy4wNSAzLjA1IDAgMCAxLTEuMzYuOTk3VjguMjc5YS41Mi41MiAwIDAgMC0uMjc2LS40NDVtMS4zNi0yLjAxNWwtLjA5Ny0uMDU3bC0zLjIyNi0xLjg1NWEuNTMuNTMgMCAwIDAtLjUzIDBMNi4yNDkgNi4xNTNWNC41OThhLjA0LjA0IDAgMCAxIC4wMTktLjA0TDkuNTMzIDIuN2EzLjA3IDMuMDcgMCAwIDEgMy4yNTcuMTM5Yy40NzQuMzI1Ljg0My43NzggMS4wNjYgMS4zMDNjLjIyMy41MjYuMjg5IDEuMTAzLjE5MSAxLjY2NHpNNS41MDMgOC41NzVMNC4xMzkgNy44YS4wNS4wNSAwIDAgMS0uMDI2LS4wMzdWNC4wNDljMC0uNTcuMTY2LTEuMTI3LjQ3Ni0xLjYwN3MuNzUyLS44NjQgMS4yNzUtMS4xMDVhMy4wOCAzLjA4IDAgMCAxIDMuMjM0LjQxbC0uMDk2LjA1NGwtMy4yMyAxLjgzOGEuNTMuNTMgMCAwIDAtLjI2NS40NTV6bS43NDItMS41NzdsMS43NTgtMWwxLjc2MiAxdjJsLTEuNzU1IDFsLTEuNzYyLTF6IiBmaWxsPSIjMDAwIi8+PC9nPjwvc3ZnPg==')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="openai.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/openai.svg')"></span></div>
-          </figure>
-        </div>
+      <li>
+        <a class="outline-item" href="/?icon=ton">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/ton.svg')"></span></span>
+          <span>ton</span>
+        </a>
       </li>
-      <li class="compare-row">
-        <h2>groq</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_bxl_groq_ai"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwKSBzY2FsZSgxIDEpIj48cGF0aCBkPSJNMyAzdjE4aDE4VjN6bTExLjcyIDEzLjM3Yy0uNDEuMzgtLjgyLjY2LTEuMzMuODdsLS4yMS4wOWMtLjgzLjMtMS44Mi4yMS0yLjYzLS4xYy0uNDUtLjIxLS44Mi0uNDYtMS4xOS0uOGMuMzMtLjQxLjY2LS43NSAxLjA3LTEuMDdsLjI3LjIxYy41LjM1IDEgLjQ3IDEuNjEuNDFjLjYyLS4xMiAxLjEyLS40IDEuNTItLjljLjM3LS42MS40MS0xLjA5LjQxLTEuOFYxMC40YzAtLjcyLS4xNS0xLjE4LS42LTEuNzRjLS42MS0uNDktMS4xNy0uNzQtMS45Ni0uN2MtLjY2LjExLTEuMTkuNDItMS41OS45NWMtLjMzLjUzLS40OCAxLjA3LS4zNyAxLjY5Yy4yLjY4LjQ1IDEuMjUgMS4wNyAxLjYxYy41Mi4yNy45OC4zMiAxLjU2LjMzaC4yNWMuMi4wMi40LjAyLjYxLjAzVjE0Yy0xLjQ5LjA2LTIuNjUuMDYtMy44NC0uOTdhNC4yMiA0LjIyIDAgMCAxLTEuMjMtMi44Yy4wNC0uODguMzUtMS42Ljg2LTIuMzJsLjE1LS4yM2MxLjQzLTEuNTEgMy43LTEuNjEgNS4zMS0uMzFsLjE3LjE0Yy41OC41Mi45NiAxLjI1IDEuMDggMi4wMWMwIC4xNi4wMS4zMy4wMS40OXYzLjZjMCAxLjA1LS4zIDEuOTUtMS4wMiAyLjc0WiIgZmlsbD0iIzAwMCIvPjwvZz48L3N2Zz4=')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="groq-ai.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/groq-ai.svg')"></span></div>
-          </figure>
-        </div>
+      <li>
+        <a class="outline-item" href="/?icon=openai">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/openai.svg')"></span></span>
+          <span>openai</span>
+        </a>
       </li>
-      <li class="compare-row">
-        <h2>tron</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_cryptocurrency_trx"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwKSBzY2FsZSgxIDEpIj48cGF0aCBkPSJNMTYgMGM4LjgzNyAwIDE2IDcuMTYzIDE2IDE2cy03LjE2MyAxNi0xNiAxNlMwIDI0LjgzNyAwIDE2UzcuMTYzIDAgMTYgME03LjUgNy4yNTdsNy41OTUgMTkuMTEybDEwLjU4My0xMi44OTRsLTMuNzQ2LTMuNTYyem0xNi4yNTIgNi45NzdsLTcuNjcgOS4zNDRsLjk4My04LjEzM3pNOS40NzIgOS40ODhsNi42MzMgNS41MDJsLTEuMDM4IDguNTh6TTIxLjcgMTEuMDgzbDIuMjA4IDIuMDk5bC02LjAzOCAxLjA5M3pNMTAuMTk0IDguNzc4bDEwLjQwMiAxLjkxNGwtNC4wMzggMy4zNjR6IiBmaWxsPSIjMDAwIi8+PC9nPjwvc3ZnPg==')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="trx.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/trx.svg')"></span></div>
-          </figure>
-        </div>
+      <li>
+        <a class="outline-item" href="/?icon=groq-ai">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/groq-ai.svg')"></span></span>
+          <span>groq-ai</span>
+        </a>
       </li>
-      <li class="compare-row">
-        <h2>цільова валюта · гривня</h2>
-        <div class="compare-pair">
-          <figure>
-            <figcaption>до</figcaption>
-            <div class="compare-swatch" title="inu_bi_currency_dollar"><span class="compare-icon" aria-hidden="true" style="--shape: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwKSBzY2FsZSgxIDEpIj48cGF0aCBkPSJNNCAxMC43ODFjLjE0OCAxLjY2NyAxLjUxMyAyLjg1IDMuNTkxIDMuMDAzVjE1aDEuMDQzdi0xLjIxNmMyLjI3LS4xNzkgMy42NzgtMS40MzggMy42NzgtMy4zYzAtMS41OS0uOTQ3LTIuNTEtMi45NTYtMy4wMjhsLS43MjItLjE4N1YzLjQ2N2MxLjEyMi4xMSAxLjg3OS43MTQgMi4wNyAxLjYxNmgxLjQ3Yy0uMTY2LTEuNi0xLjU0LTIuNzQ4LTMuNTQtMi44NzVWMUg3LjU5MXYxLjIzM2MtMS45MzkuMjMtMy4yNyAxLjQ3Mi0zLjI3IDMuMTU2YzAgMS40NTQuOTY2IDIuNDgzIDIuNjYxIDIuOTE3bC42MS4xNjJ2NC4wMzFjLTEuMTQ5LS4xNy0xLjk0LS44LTIuMTMxLTEuNzE4em0zLjM5MS0zLjgzNmMtMS4wNDMtLjI2My0xLjYtLjgyNS0xLjYtMS42MTZjMC0uOTQ0LjcwNC0xLjY0MSAxLjgtMS44Mjh2My40OTVsLS4yLS4wNXptMS41OTEgMS44NzJjMS4yODcuMzIzIDEuODUyLjg1OSAxLjg1MiAxLjc2OWMwIDEuMDk3LS44MjYgMS44MjgtMi4yIDEuOTM5VjguNzN6IiBmaWxsPSIjMDAwIi8+PC9nPjwvc3ZnPg==')"></span></div>
-          </figure>
-          <figure>
-            <figcaption>після</figcaption>
-            <div class="compare-swatch" title="currency-hryvnia.svg"><span class="compare-icon" aria-hidden="true" style="--shape: url('/svg/currency-hryvnia.svg')"></span></div>
-          </figure>
-        </div>
+      <li>
+        <a class="outline-item" href="/?icon=trx">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/trx.svg')"></span></span>
+          <span>trx</span>
+        </a>
+      </li>
+      <li>
+        <a class="outline-item" href="/?icon=entinygram-old">
+          <span class="compare-swatch" aria-hidden="true"><span class="compare-icon" style="--shape: url('/svg/entinygram-old.svg')"></span></span>
+          <span>entinygram-old</span>
+        </a>
       </li>
     </ul>
   </main>
