@@ -1,0 +1,27 @@
+---
+import "../styles/gallery.css";
+
+interface Props {
+  title: string;
+  bodyClass?: string;
+  description?: string;
+  descriptionEn?: string;
+  preloadFont?: boolean;
+}
+
+const { title, bodyClass, description, descriptionEn, preloadFont = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {description && <meta name="description" content={description} data-en-content={descriptionEn} />}
+    <title>{title}</title>
+    {preloadFont && <link rel="preload" href="/fonts/overused-grotesk.woff2" as="font" type="font/woff2" crossorigin />}
+  </head>
+  <body class={bodyClass}>
+    <slot />
+  </body>
+</html>

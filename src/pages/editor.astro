@@ -1,0 +1,122 @@
+---
+import Base from "../layouts/Base.astro";
+import "../styles/editor.css";
+
+const presets = ["#ff4d6d", "#3b9cff", "#f5a524", "#2fbf71", "#19c3b1", "#a855f7", "#ff7a3d"];
+---
+
+<Base title="редактор іконок · entiny icons" bodyClass="gallery-page editor-page" description="Редактор SVG-іконок entinyGram із налаштуванням розміру, кольору й фону." preloadFont>
+  <a class="skip" href="#main">до вмісту</a>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="wordmark" href="/">
+        <span class="pack-mark" aria-hidden="true"></span>
+        <span>entiny<span class="wordmark-suffix"> icons</span></span>
+      </a>
+      <nav class="top-nav" aria-label="розділи">
+        <a class="top-link" href="/">бібліотека</a>
+        <a class="top-link" href="/editor" aria-current="page">редактор</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" id="main">
+    <div class="intro" data-enter>
+      <h1>редактор іконок</h1>
+    </div>
+
+    <div class="editor-layout">
+      <section class="picker" aria-labelledby="picker-title">
+        <div class="picker-head"><h2 id="picker-title">вибрати іконку</h2><p class="technical" id="count" role="status"></p></div>
+        <label class="search">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5"></circle><path d="m15 15 4 4"></path></svg>
+          <input type="search" id="search" aria-label="пошук іконок" placeholder="пошук іконок або тегів" />
+        </label>
+        <div class="catalog" id="catalog"></div>
+        <p class="picker-empty" id="picker-empty" hidden>іконок за цим запитом немає</p>
+      </section>
+
+      <section class="panel" aria-labelledby="edit-title">
+        <div class="edit-head">
+          <h2 id="edit-title"></h2>
+          <fieldset class="styles" id="styles" hidden>
+            <legend class="screen-reader-only">стиль іконки</legend>
+            <label>
+              <input type="radio" name="style" value="outline" checked />
+              <span class="edit-style"><svg aria-hidden="true" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>контур</span>
+            </label>
+            <label>
+              <input type="radio" name="style" value="filled" />
+              <span class="edit-style"><svg aria-hidden="true" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6" fill="currentColor"/></svg>заливка</span>
+            </label>
+          </fieldset>
+        </div>
+        <div class="edit-stage" id="stage" data-surface="dark">
+          <div class="edit-art" id="art" aria-hidden="true"></div>
+          <span class="technical edit-name" id="file-name"></span>
+        </div>
+
+        <div class="controls">
+          <div class="field">
+            <span class="field-label">колір</span>
+            <div class="color-row">
+              <input type="color" id="color" value="#ff4d6d" aria-label="колір" />
+              <input type="text" id="hex" value="#ff4d6d" maxlength="7" spellcheck="false" aria-label="hex колір" />
+            </div>
+            <div class="presets" id="presets">
+              {presets.map((color) => (
+                <button type="button" class="preset" data-color={color} style={`--c: ${color}`} aria-label={color}></button>
+              ))}
+            </div>
+          </div>
+
+          <fieldset class="field segmented" id="bg">
+            <legend class="field-label">підкладка</legend>
+            <label><input type="radio" name="bg" value="tile" checked /><span>плитка</span></label>
+            <label><input type="radio" name="bg" value="none" /><span>без</span></label>
+          </fieldset>
+
+          <fieldset class="surfaces editor-surfaces" id="surface">
+            <legend class="field-label">фон прев’ю</legend>
+            <div class="surface-options">
+              <label><input type="radio" name="surface" value="dark" checked /><span class="surface-option"><i class="surface-chip surface-chip--dark" aria-hidden="true"></i>темний</span></label>
+              <label><input type="radio" name="surface" value="light" /><span class="surface-option"><i class="surface-chip surface-chip--light" aria-hidden="true"></i>світлий</span></label>
+            </div>
+          </fieldset>
+
+          <label class="range-label" for="opacity"><span>прозорість плитки</span> <output id="opacity-value">22%</output></label>
+          <input id="opacity" type="range" min="0" max="100" value="22" />
+          <label class="range-label" for="radius"><span>скруглення</span> <output id="radius-value">6</output></label>
+          <input id="radius" type="range" min="0" max="12" step="0.5" value="6" />
+          <label class="range-label" for="scale"><span>розмір знака</span> <output id="scale-value">62%</output></label>
+          <input id="scale" type="range" min="30" max="100" value="62" />
+          <label class="range-label" for="weight"><span>товщина лінії</span> <output id="weight-value">100%</output></label>
+          <input id="weight" type="range" min="50" max="200" value="100" />
+          <label class="range-label" for="size"><span>розмір файла</span> <output id="size-value">96 px</output></label>
+          <input id="size" type="range" min="16" max="512" step="8" value="96" />
+        </div>
+
+        <div class="actions">
+          <button class="button primary" type="button" id="copy">копіювати svg</button>
+          <button class="button" type="button" id="download-svg">svg</button>
+          <button class="button" type="button" id="download-png">png</button>
+        </div>
+        <p class="feedback" id="feedback" role="status"></p>
+
+        <div class="api">
+          <div class="field-label">api (dev-сервер)</div>
+          <button class="api-url technical" type="button" id="api-url" title="копіювати посилання"></button>
+        </div>
+      </section>
+    </div>
+
+    <section class="pack-preview" aria-label="набір у цьому стилі">
+      <h2>набір у цьому стилі</h2>
+      <div class="pack-grid" id="pack-grid"></div>
+    </section>
+  </main>
+</Base>
+
+<script>
+  import "../scripts/editor.js";
+</script>

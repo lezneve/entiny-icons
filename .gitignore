@@ -1,2 +1,12 @@
 node_modules
-drafts
+icons/drafts/*
+!icons/drafts/capture.svg
+!icons/drafts/capture-*.svg
+!icons/drafts/download.svg
+!icons/drafts/download-*.svg
+!icons/drafts/file-text.svg
+!icons/drafts/file-text-*.svg
+!icons/drafts/grid-sparkle.svg
+!icons/drafts/grid-sparkle-*.svg
+dist
+.astro

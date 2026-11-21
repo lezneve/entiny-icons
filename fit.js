@@ -6,7 +6,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 const [target, mode, ...names] = process.argv.slice(2);
 const size = Number(target);
 for (const name of names) {
-  const file = `svg/${name}.svg`;
+  const file = `icons/outline/${name}.svg`;
   let svg = readFileSync(file, "utf8");
   const stroke = Number(/stroke-width="([\d.]+)"/.exec(svg)?.[1] ?? 0) / 2;
   const ds = [...svg.matchAll(/ d="([^"]+)"/g)].map((m) => m[1]);

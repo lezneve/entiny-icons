@@ -1,7 +1,7 @@
 {
   "name": "entiny-icons",
-  "version": "0.4.0",
-  "description": "entinyGram icon pack: one style, 24x24 grid, Iconify-compatible JSON",
+  "version": "1.0.0",
+  "description": "entinyGram icon pack: outline, 24x24 grid, Iconify-compatible JSON",
   "private": false,
   "license": "MIT",
   "type": "module",
@@ -9,15 +9,17 @@
   "exports": {
     ".": "./icons.json",
     "./icons.json": "./icons.json",
-    "./svg/*": "./svg/*"
+    "./outline/*": "./icons/outline/*"
   },
-  "files": ["icons.json", "svg"],
+  "files": ["icons.json", "icons/outline"],
   "scripts": {
-    "dev": "bun dev.js",
+    "dev": "astro dev",
     "build": "bun build.js",
-    "check": "bun build.js --check"
+    "check": "bun build.js --check",
+    "site": "astro build"
   },
   "devDependencies": {
+    "astro": "^7.4.13",
     "svg-path-bbox": "^2.1.0",
     "svgpath": "^2.6.0"
   }

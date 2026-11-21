@@ -1,0 +1,184 @@
+---
+import Base from "../layouts/Base.astro";
+import { categories, categoryLabels } from "../lib/catalog.js";
+
+const labels = {
+  all: ["усі", "all"],
+  ...Object.fromEntries(categories.map((name) => [name, [categoryLabels.uk[name], categoryLabels.en[name]]])),
+};
+const topics = [
+  ["чат", "chat"],
+  ["тема", "theme"],
+  ["переклад", "translation"],
+  ["архів", "archive"],
+];
+const surfaces = [
+  ["auto", "авто", "auto"],
+  ["light", "світлий", "light"],
+  ["dark", "темний", "dark"],
+  ["clear", "прозорий", "clear"],
+];
+---
+
+<Base
+  title="бібліотека іконок · entiny icons"
+  bodyClass="gallery-page"
+  description="Галерея SVG-іконок із прозорим фоном."
+  descriptionEn="An SVG icon gallery with outline and filled styles."
+  preloadFont
+>
+  <a class="skip" href="#main" data-en="skip to content">до вмісту</a>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="wordmark" href="/">
+        <span class="pack-mark" aria-hidden="true"></span>
+        <span>entiny<span class="wordmark-suffix"> icons</span></span>
+      </a>
+      <nav class="top-nav" aria-label="розділи" data-en-aria-label="navigation">
+        <a class="top-link" href="/" aria-current="page" data-en="library">бібліотека</a>
+        <a class="top-link" href="/editor" data-en="editor">редактор</a>
+        <select class="language" id="language" aria-label="мова галереї" data-en-aria-label="gallery language">
+          <option value="uk" lang="uk">uk</option>
+          <option value="en" lang="en">en</option>
+        </select>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" id="main">
+    <div class="intro" data-enter>
+      <h1 data-en="icon library">бібліотека іконок</h1>
+      <p class="lede" data-en="Outline and filled SVG icons for entinyGram.">Контурні й суцільні SVG-іконки для entinyGram.</p>
+    </div>
+
+    <div class="gallery-layout">
+    <section class="collection" id="collection" aria-labelledby="collection-title">
+      <div class="toolbar">
+      <h2 class="screen-reader-only" id="collection-title" data-en="collection">колекція</h2>
+        <label class="search">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 4 4"/></svg>
+          <input type="search" id="search" aria-label="пошук іконок" data-en-aria-label="search icons" aria-keyshortcuts="/ Control+K Meta+K" placeholder="пошук іконок або тегів" data-en-placeholder="search icons or tags">
+          <kbd class="search-shortcut" aria-hidden="true">/</kbd>
+        </label>
+      <div class="topics" id="topics" role="group" aria-label="популярні теги" data-en-aria-label="popular tags">
+        <span class="topic-label" data-en="tags">теги</span>
+        {topics.map(([uk, en]) => <button type="button" data-en={en} aria-pressed="false">{uk}</button>)}
+      </div>
+      <div class="collection-tools">
+        <fieldset class="categories">
+          <legend class="screen-reader-only" data-en="icon category">категорія іконок</legend>
+          {["all", ...categories].map((category) => (
+            <label>
+              <input type="radio" name="category" value={category} checked={category === "all"}>
+              <span data-en={labels[category][1]}>{labels[category][0]}</span>
+            </label>
+          ))}
+        </fieldset>
+        <label class="sort">
+          <span class="screen-reader-only" data-en="sort icons">сортування іконок</span>
+          <select id="sort">
+            <option value="pack" data-en="pack order">порядок паку</option>
+            <option value="asc" data-en="name a → z">назва a → z</option>
+            <option value="desc" data-en="name z → a">назва z → a</option>
+          </select>
+        </label>
+        <output class="result-count" id="count"></output>
+      </div>
+      </div>
+      <div class="catalog" id="catalog"></div>
+      <div id="empty" class="catalog-empty" hidden>
+        <p role="status" data-en="no icons match these filters">іконок за цими умовами немає</p>
+        <button class="button" type="button" id="reset-filters" data-en="reset filters">скинути фільтри</button>
+      </div>
+    </section>
+
+    <aside class="detail" aria-label="перегляд іконки" data-en-aria-label="icon preview">
+    <div id="detail-content">
+    <div class="mobile-detail-head">
+      <button class="text-button back-to-results" id="back-to-results" type="button" autofocus>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg>
+        <span data-en="back to library">до колекції</span>
+      </button>
+    </div>
+    <section class="workbench" aria-labelledby="icon-name" hidden>
+      <div class="preview">
+        <div class="preview-head">
+          <span class="technical" id="file-name"></span>
+          <button class="text-button grid-toggle" id="toggle-guides" type="button" aria-pressed="true" aria-label="сітка прев’ю" data-en-aria-label="preview grid">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 4v16m6-16v16M4 9h16M4 15h16"/></svg>
+          </button>
+        </div>
+        <div class="preview-tools">
+          <fieldset class="styles" hidden>
+            <legend class="screen-reader-only" data-en="icon style">стиль іконок</legend>
+            <label><input type="radio" name="style" value="outline" checked><span data-en="outline">контур</span></label>
+            <label><input type="radio" name="style" value="solid"><span data-en="filled">заливка</span></label>
+          </fieldset>
+        </div>
+        <div class="stage" data-surface="auto">
+          <div class="stage-visual">
+            <span class="guides" aria-hidden="true"></span>
+            <span class="art" id="stage-art" aria-hidden="true"></span>
+          </div>
+          <span class="stage-note technical">24 × 24 viewbox</span>
+        </div>
+      </div>
+      <div class="inspector">
+        <div class="icon-title">
+          <h2 id="icon-name" tabindex="-1"></h2>
+          <div class="icon-tags">
+            <button class="category-tag" type="button" id="category-tag"></button>
+          </div>
+        </div>
+        <div class="keyword-tags" id="keyword-tags" role="group" aria-label="пошук за тегом" data-en-aria-label="search by tag"></div>
+        <div class="actions">
+          <button class="button primary" type="button" id="copy" disabled>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+            <span data-en="copy svg">копіювати svg</span>
+          </button>
+          <a class="button" id="download" download aria-label="зберегти svg" data-en-aria-label="download svg" title="зберегти svg" data-en-title="download svg">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg>
+          </a>
+          <button class="button" type="button" id="copy-link" aria-label="копіювати посилання" data-en-aria-label="copy link" title="копіювати посилання" data-en-title="copy link" disabled>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 15 6-6m-4-2 2-2a4.25 4.25 0 0 1 6 6l-2 2m-4 4-2 2a4.25 4.25 0 0 1-6-6l2-2"/></svg>
+          </button>
+        </div>
+        <p id="feedback" class="feedback" role="status"></p>
+        <div class="settings">
+          <label class="range-label" for="size"><span data-en="size">розмір</span> <output class="technical" id="size-value" for="size">176 px</output></label>
+          <input id="size" type="range" min="16" max="240" value="176">
+          <label class="range-label" for="stroke"><span data-en="stroke">лінія</span> <output class="technical" id="stroke-value" for="stroke">1.5 px</output></label>
+          <input id="stroke" type="range" min="0.5" max="3" step="0.25" value="1.5">
+          <fieldset class="surfaces">
+            <legend data-en="preview background">фон прев’ю</legend>
+            <div class="surface-options">
+              {surfaces.map(([value, uk, en]) => (
+                <label>
+                  <input type="radio" name="surface" value={value} checked={value === "auto"}>
+                  <span class="surface-option">
+                    <i class={`surface-chip surface-chip--${value}`} aria-hidden="true"></i>
+                    <span data-en={en}>{uk}</span>
+                  </span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        </div>
+        <a id="edit-icon" class="edit-link" href="/editor">
+          <span data-en="open in editor">відкрити в редакторі</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 19 19 5M8 5h11v11"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <p id="load-status" role="status">завантажую іконки…</p>
+    </div>
+    </aside>
+    </div>
+  </main>
+  <dialog class="mobile-detail" aria-label="перегляд іконки" data-en-aria-label="icon preview"></dialog>
+</Base>
+
+<script>
+  import "../scripts/gallery.js";
+</script>
