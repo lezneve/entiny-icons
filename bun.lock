@@ -1,0 +1,18 @@
+{
+  "lockfileVersion": 2,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "entiny-icons",
+      "devDependencies": {
+        "svg-path-bbox": "^2.1.0",
+        "svgpath": "^2.6.0",
+      },
+    },
+  },
+  "packages": {
+    "svg-path-bbox": ["svg-path-bbox@2.1.0", "", { "dependencies": { "svgpath": "^2.6.0" }, "bin": { "svg-path-bbox": "src/cli.js" } }, "sha512-PEoSQFbBvL7FOCE4cN8Knej6L7bXdNkjPcUYsfMMpq0HpnqiO0sE2mcXTd7LX160aOyh5HbaeN/SoY8thMk5Kg=="],
+
+    "svgpath": ["svgpath@2.6.0", "", {}, "sha512-OIWR6bKzXvdXYyO4DK/UWa1VA1JeKq8E+0ug2DG98Y/vOmMpfZNj+TIG988HjfYSqtcy/hFOtZq/n/j5GSESNg=="],
+  }
+}

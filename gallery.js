@@ -185,6 +185,8 @@ const icons = [
 
 const categoryLabels = { brands: "бренди", system: "системні", other: "інші" };
 const collator = new Intl.Collator("uk", { numeric: true });
+const plurals = new Intl.PluralRules("uk");
+const iconNouns = { one: "іконка", few: "іконки", many: "іконок", other: "іконки" };
 const find = (selector) => document.querySelector(selector);
 const iconUrl = (file) => `/svg/${file}`;
 const stage = find(".stage");
@@ -202,24 +204,30 @@ const styleTag = find("#style-tag");
 const feedback = find("#feedback");
 const download = find("#download");
 const copy = find("#copy");
+const copyLink = find("#copy-link");
+const iconName = find("#icon-name");
+const categoryTag = find("#category-tag");
+const keywordTags = find("#keyword-tags");
 const samples = find("#samples");
+const stacked = matchMedia("(max-width: 800px)");
 
 let selected = null;
 let request = 0;
 let activeSource = "";
 
-function renderCatalog() {
-  const query = search.value.trim().toLowerCase();
+function renderCatalog(preferred = selected) {
+  const query = search.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
   const category = categories.querySelector("input:checked").value;
-  const matches = icons.filter((icon) =>
-    (category === "all" || icon.category === category)
-    && [icon.name, ...icon.keywords].some((word) => word.includes(query))
-  );
+  const matches = icons.filter((icon) => {
+    if (category !== "all" && icon.category !== category) return false;
+    const terms = [icon.name, ...icon.keywords];
+    return query.every((word) => terms.some((term) => term.includes(word)));
+  });
   if (sort.value === "asc") matches.sort((a, b) => collator.compare(a.name, b.name));
   if (sort.value === "desc") matches.sort((a, b) => collator.compare(b.name, a.name));
 
-  const nextIcon = matches.includes(selected) ? selected : matches[0];
-  find("#count").textContent = `(${matches.length})`;
+  const nextIcon = matches.includes(preferred) ? preferred : matches[0];
+  find("#count").textContent = `${matches.length} ${iconNouns[plurals.select(matches.length)]}`;
   find("#empty").hidden = Boolean(nextIcon);
 
   catalog.replaceChildren(...matches.map((icon) => {
@@ -233,7 +241,8 @@ function renderCatalog() {
     swatch.setAttribute("aria-hidden", "true");
     swatch.style.setProperty("--icon", `url("${iconUrl(Object.values(icon.variants)[0])}")`);
 
-    const name = document.createElement("strong");
+    const name = document.createElement("span");
+    name.className = "catalog-name";
     name.textContent = icon.name;
     button.append(swatch, name);
     button.addEventListener("click", async () => {
@@ -242,9 +251,11 @@ function renderCatalog() {
       button.setAttribute("aria-pressed", "true");
       await openIcon(icon);
       const { top, bottom } = workbench.getBoundingClientRect();
-      if (selected === icon && !workbench.hidden && (top > window.innerHeight - 80 || bottom < 80)) {
+      if (selected !== icon || workbench.hidden) return;
+      if (stacked.matches || top > window.innerHeight - 80 || bottom < 80) {
         workbench.scrollIntoView({ block: "start" });
       }
+      if (stacked.matches) iconName.focus({ preventScroll: true });
     });
     return button;
   }));
@@ -256,7 +267,7 @@ function renderCatalog() {
     loadStatus.hidden = true;
   } else if (nextIcon !== selected) {
     workbench.hidden = true;
-    openIcon(nextIcon);
+    return openIcon(nextIcon);
   }
 }
 
@@ -290,6 +301,7 @@ async function openIcon(icon, variant = Object.keys(icon.variants)[0]) {
   const file = icon.variants[variant];
   activeSource = "";
   copy.disabled = true;
+  copyLink.disabled = true;
   download.removeAttribute("href");
   feedback.textContent = "";
   loadStatus.hidden = !workbench.hidden;
@@ -307,9 +319,20 @@ async function openIcon(icon, variant = Object.keys(icon.variants)[0]) {
     svg.classList.add("stage-art-enter");
     renderSamples(document.importNode(parsed.documentElement, true));
     stageArt.replaceChildren(svg);
-    find("#icon-name").textContent = icon.name;
+    iconName.textContent = icon.name;
     find("#file-name").textContent = file;
-    find("#category-tag").textContent = categoryLabels[icon.category];
+    categoryTag.textContent = categoryLabels[icon.category];
+    keywordTags.replaceChildren(...icon.keywords.map((keyword) => {
+      const tag = document.createElement("button");
+      tag.type = "button";
+      tag.textContent = keyword;
+      tag.addEventListener("click", () => {
+        search.value = keyword;
+        renderCatalog();
+        search.focus();
+      });
+      return tag;
+    }));
 
     const variants = Object.keys(icon.variants);
     variantSelect.replaceChildren(...variants.map((style) => new Option(style, style)));
@@ -321,6 +344,7 @@ async function openIcon(icon, variant = Object.keys(icon.variants)[0]) {
     download.download = file;
     activeSource = source;
     copy.disabled = false;
+    copyLink.disabled = false;
     loadStatus.hidden = true;
     workbench.hidden = false;
   } catch {
@@ -338,9 +362,35 @@ function updateSize() {
 }
 
 size.addEventListener("input", updateSize);
-search.addEventListener("input", renderCatalog);
-categories.addEventListener("change", renderCatalog);
-sort.addEventListener("change", renderCatalog);
+search.addEventListener("input", () => renderCatalog());
+categories.addEventListener("change", () => renderCatalog());
+sort.addEventListener("change", () => renderCatalog());
+document.addEventListener("keydown", (event) => {
+  const editing = event.target.matches?.("input, textarea, select, [contenteditable]");
+  const slash = event.key === "/" && !editing && !event.ctrlKey && !event.metaKey;
+  const chord = event.key.toLowerCase() === "k" && (event.ctrlKey || event.metaKey);
+  if (event.defaultPrevented || event.altKey || (!slash && !chord)) return;
+  event.preventDefault();
+  search.focus();
+  search.select();
+});
+categoryTag.addEventListener("click", () => {
+  search.value = "";
+  categories.querySelector(`[value="${selected.category}"]`).checked = true;
+  renderCatalog();
+  search.focus();
+});
+find("#back-to-results").addEventListener("click", () => {
+  const result = catalog.querySelector('[aria-pressed="true"]');
+  result?.scrollIntoView({ block: "center" });
+  result?.focus({ preventScroll: true });
+});
+find("#toggle-guides").addEventListener("click", (event) => {
+  const button = event.currentTarget;
+  const enabled = button.getAttribute("aria-pressed") === "false";
+  button.setAttribute("aria-pressed", String(enabled));
+  stage.dataset.guides = enabled ? "on" : "off";
+});
 find("#reset-filters").addEventListener("click", () => {
   search.value = "";
   categories.querySelector('[value="all"]').checked = true;
@@ -351,17 +401,33 @@ variantSelect.addEventListener("change", () => openIcon(selected, variantSelect.
 find(".surfaces").addEventListener("change", (event) => {
   stage.dataset.surface = event.target.value;
 });
-copy.addEventListener("click", async () => {
+async function copyText(text, success, failure) {
   const currentRequest = request;
   let message;
   try {
-    await navigator.clipboard.writeText(activeSource);
-    message = "svg скопійовано";
+    await navigator.clipboard.writeText(text);
+    message = success;
   } catch {
-    message = "буфер обміну недоступний. збережи svg файлом.";
+    message = failure;
   }
   if (currentRequest === request) feedback.textContent = message;
+}
+
+copy.addEventListener("click", () => {
+  copyText(activeSource, "svg скопійовано", "буфер обміну недоступний. збережи svg файлом.");
+});
+copyLink.addEventListener("click", () => {
+  const url = new URL("/", location.href);
+  url.searchParams.set("icon", selected.name);
+  copyText(url.href, "посилання скопійовано", "не вдалося скопіювати посилання.");
 });
 
 updateSize();
-renderCatalog();
+const linkedName = new URLSearchParams(location.search).get("icon");
+const linkedIcon = icons.find((icon) => icon.name === linkedName);
+const initialPreview = renderCatalog(linkedIcon);
+if (linkedIcon && stacked.matches) {
+  initialPreview?.then(() => {
+    if (selected === linkedIcon && !workbench.hidden) workbench.scrollIntoView({ block: "start" });
+  });
+}

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./gallery.css">
     <script type="module" src="./gallery.js"></script>
   </head>
-  <body>
+  <body class="gallery-page">
     <a class="skip" href="#main">до вмісту</a>
     <header class="top">
       <div class="wrap top-inner">
@@ -26,16 +26,16 @@
     <main class="wrap" id="main">
       <div class="intro">
         <h1>галерея іконок<span>.</span></h1>
-        <p>векторні знаки для entinygram і вебу</p>
       </div>
 
       <div class="gallery-layout">
       <section class="collection" id="collection" aria-labelledby="collection-title">
         <div class="collection-head">
-          <h2 id="collection-title">колекція <output class="technical" id="count" aria-label="знайдено іконок"></output></h2>
+          <h2 class="screen-reader-only" id="collection-title">колекція</h2>
           <label class="search">
             <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 4 4"/></svg>
-            <input type="search" id="search" aria-label="пошук іконок" placeholder="пошук іконок">
+            <input type="search" id="search" aria-label="пошук іконок" aria-keyshortcuts="/ Control+K Meta+K" placeholder="пошук іконок">
+            <kbd class="search-shortcut" aria-hidden="true">/</kbd>
           </label>
         </div>
         <div class="collection-tools">
@@ -54,6 +54,7 @@
             </select>
           </label>
         </div>
+        <output class="result-count" id="count" aria-label="знайдено іконок"></output>
         <div class="catalog" id="catalog"></div>
         <div id="empty" class="catalog-empty" hidden>
           <p role="status">іконок за цими умовами немає</p>
@@ -65,8 +66,11 @@
       <section class="workbench" aria-labelledby="icon-name" hidden>
         <div class="preview">
           <div class="preview-head">
-            <h2>передперегляд</h2>
-            <span class="technical" id="file-name">monobank.svg</span>
+            <button class="text-button back-to-results" id="back-to-results" type="button">↑ до колекції</button>
+            <span class="technical" id="file-name"></span>
+            <button class="text-button grid-toggle" id="toggle-guides" type="button" aria-pressed="true" aria-label="сітка прев’ю">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 4v16m6-16v16M4 9h16M4 15h16"/></svg>
+            </button>
           </div>
           <div class="stage" data-surface="dark">
             <div class="stage-visual">
@@ -78,13 +82,27 @@
         </div>
         <div class="inspector">
           <div class="icon-title">
-            <h2 id="icon-name">monobank</h2>
+            <h2 id="icon-name" tabindex="-1"></h2>
             <label class="style-label">стиль <select id="variant" aria-label="стиль іконки"></select></label>
             <div class="icon-tags">
-              <span class="category-tag" id="category-tag"></span>
+              <button class="category-tag" type="button" id="category-tag"></button>
               <span class="style-tag" id="style-tag"></span>
             </div>
           </div>
+          <div class="keyword-tags" id="keyword-tags" aria-label="пошук за тегом"></div>
+          <div class="actions">
+            <button class="button primary" type="button" id="copy" disabled>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+              <span>копіювати svg</span>
+            </button>
+            <a class="button" id="download" download aria-label="зберегти svg" title="зберегти svg">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg>
+            </a>
+            <button class="button" type="button" id="copy-link" aria-label="копіювати посилання" title="копіювати посилання" disabled>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 15 6-6m-4-2 2-2a4.25 4.25 0 0 1 6 6l-2 2m-4 4-2 2a4.25 4.25 0 0 1-6-6l2-2"/></svg>
+            </button>
+          </div>
+          <p id="feedback" class="feedback" role="status"></p>
           <div class="settings">
             <label class="range-label" for="size">розмір <output class="technical" id="size-value" for="size">240 px</output></label>
             <input id="size" type="range" min="16" max="240" value="240">
@@ -99,17 +117,6 @@
             <h3>реальні розміри</h3>
             <div id="samples" class="sample-grid"></div>
           </div>
-          <div class="actions">
-            <a class="button primary" id="download" download>
-              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg>
-              <span>зберегти svg</span>
-            </a>
-            <button class="button" type="button" id="copy">
-              <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
-              <span>копіювати</span>
-            </button>
-          </div>
-          <p id="feedback" class="feedback" role="status"></p>
         </div>
       </section>
 

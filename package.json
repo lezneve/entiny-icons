@@ -1,6 +1,6 @@
 {
   "name": "entiny-icons",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "entinyGram icon pack: one style, 24x24 grid, Iconify-compatible JSON",
   "private": false,
   "license": "MIT",
@@ -16,5 +16,9 @@
     "dev": "bun dev.js",
     "build": "bun build.js",
     "check": "bun build.js --check"
+  },
+  "devDependencies": {
+    "svg-path-bbox": "^2.1.0",
+    "svgpath": "^2.6.0"
   }
 }
