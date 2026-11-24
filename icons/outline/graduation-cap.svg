@@ -1,3 +1,3 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M2.75 9.5 12 5l9.25 4.5L12 14ZM6.5 11.75v4.5c0 1.25 2.5 2.75 5.5 2.75s5.5-1.5 5.5-2.75v-4.5M21.25 9.5v5"/>
+  <path d="M2.75 9.5L11.371 5.306Q12 5 12.629 5.306L21.25 9.5L12.629 13.694Q12 14 11.371 13.694ZM6.5 11.75V16.25C6.5 17.5 9 19 12 19C15 19 17.5 17.5 17.5 16.25V11.75M21.25 9.5V14.5"/>
 </svg>

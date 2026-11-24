@@ -1,5 +1,10 @@
 node_modules
 icons/drafts/*
+!icons/drafts/core/
+!icons/drafts/brands/
+!icons/drafts/shields-messages/
+!icons/drafts/folders-chats/
+!icons/drafts/outline-review/
 !icons/drafts/capture.svg
 !icons/drafts/capture-*.svg
 !icons/drafts/download.svg
